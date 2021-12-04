@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using AdventOfCode2021.Day4.Shared;
+using AdventOfCode2021.Day4.PartOne;
 
-namespace AdventOfCode2021.Day4.PartOne
+namespace AdventOfCode2021.Day4.Shared
 {
     public class BingoBoard
     {

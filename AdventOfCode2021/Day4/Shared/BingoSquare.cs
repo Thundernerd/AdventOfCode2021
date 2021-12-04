@@ -1,4 +1,4 @@
-namespace AdventOfCode2021.Day4.PartOne
+namespace AdventOfCode2021.Day4.Shared
 {
     public class BingoSquare
     {

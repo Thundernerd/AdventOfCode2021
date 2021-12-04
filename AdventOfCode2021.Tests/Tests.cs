@@ -12,6 +12,7 @@ using AdventOfCode2021.Day3.PartOne;
 using AdventOfCode2021.Day3.PartTwo;
 using AdventOfCode2021.Day3.Shared;
 using AdventOfCode2021.Day4.PartOne;
+using AdventOfCode2021.Day4.Shared;
 using NUnit.Framework;
 
 namespace AdventOfCode2021.Tests
@@ -141,27 +142,8 @@ namespace AdventOfCode2021.Tests
             List<BingoBoard> boards = boardParser.Parse(input);
             Assert.IsTrue(boards.Count == 3);
 
-            BingoBoard winningBoard = null;
-            int lastNumber = -1;
-
-            foreach (int number in numbers)
-            {
-                foreach (BingoBoard board in boards)
-                {
-                    board.MarkNumber(number);
-                    if (board.HasBingo())
-                    {
-                        winningBoard = board;
-                        break;
-                    }
-                }
-
-                if (winningBoard != null)
-                {
-                    lastNumber = number;
-                    break;
-                }
-            }
+            BoardSolver boardSolver = new(numberParser, boardParser);
+            BingoBoard winningBoard = boardSolver.GetWinningBoard(input, out int lastNumber);
 
             List<int> unmarkedNumbers = winningBoard.GetUnmarkedNumbers();
 

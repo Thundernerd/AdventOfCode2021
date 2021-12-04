@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using AdventOfCode2021.Day4.PartOne;
 
-namespace AdventOfCode2021.Day4.PartOne
+namespace AdventOfCode2021.Day4.Shared
 {
     public class BoardParser
     {

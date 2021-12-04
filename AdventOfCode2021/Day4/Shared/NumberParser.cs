@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AdventOfCode2021.Day4.PartOne
+namespace AdventOfCode2021.Day4.Shared
 {
     public class NumberParser
     {
