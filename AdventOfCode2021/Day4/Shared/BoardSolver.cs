@@ -35,5 +35,32 @@ namespace AdventOfCode2021.Day4.Shared
             lastNumber = -1;
             return null;
         }
+
+        public BingoBoard GetLosingBoard(string input, out int lastNumber)
+        {
+            List<int> numbers = numberParser.Parse(input);
+            List<BingoBoard> boards = boardParser.Parse(input);
+            
+            foreach (int number in numbers)
+            {
+                lastNumber = number;
+
+                List<BingoBoard> tempBoards = new(boards);
+                foreach (BingoBoard board in tempBoards)
+                {
+                    board.MarkNumber(number);
+                    if (!board.HasBingo()) 
+                        continue;
+
+                    if (boards.Count == 1)
+                        return board;
+
+                    boards.Remove(board);
+                }
+            }
+
+            lastNumber = -1;
+            return null;
+        }
     }
 }
