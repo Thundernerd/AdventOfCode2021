@@ -20,8 +20,8 @@ namespace AdventOfCode2021
         public async Task Run(CancellationToken cancellationToken)
         {
             IOrderedEnumerable<IPuzzle> orderedPuzzles = puzzles
-                .OrderBy(x => x.Day)
-                .ThenBy(x => x.Part);
+                .OrderByDescending(x => x.Day)
+                .ThenByDescending(x => x.Part);
 
             foreach (IPuzzle puzzle in orderedPuzzles)
             {
