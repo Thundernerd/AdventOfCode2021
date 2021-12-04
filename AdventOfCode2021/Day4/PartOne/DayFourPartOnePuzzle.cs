@@ -7,10 +7,10 @@ using Microsoft.Extensions.Logging;
 
 namespace AdventOfCode2021.Day4.PartOne
 {
-    public class DayOnePartOnePuzzle : Puzzle
+    public class DayFourPartOnePuzzle : Puzzle
     {
         /// <inheritdoc />
-        public DayOnePartOnePuzzle(PuzzleDownloader puzzleDownloader, ILogger<Puzzle> logger, BoardSolver boardSolver) :
+        public DayFourPartOnePuzzle(PuzzleDownloader puzzleDownloader, ILogger<Puzzle> logger, BoardSolver boardSolver) :
             base(puzzleDownloader,
                 logger)
         {
