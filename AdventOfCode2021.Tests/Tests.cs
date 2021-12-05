@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using AdventOfCode2021.Day1;
 using AdventOfCode2021.Day1.PartOne;
@@ -13,7 +15,11 @@ using AdventOfCode2021.Day3.PartTwo;
 using AdventOfCode2021.Day3.Shared;
 using AdventOfCode2021.Day4.PartOne;
 using AdventOfCode2021.Day4.Shared;
+using AdventOfCode2021.Day5.PartOne;
+using AdventOfCode2021.Day5.PartTwo;
+using AdventOfCode2021.Day5.Shared;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace AdventOfCode2021.Tests
 {
@@ -157,15 +163,79 @@ namespace AdventOfCode2021.Tests
         {
             string input =
                 "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1\n\n22 13 17 11  0\n 8  2 23  4 24\n21  9 14 16  7\n 6 10  3 18  5\n 1 12 20 15 19\n\n 3 15  0  2 22\n 9 18 13 17  5\n19  8  7 25 23\n20 11 10 24  4\n14 21 16 12  6\n\n14 21 17 24  4\n10 16 15  9 19\n18  8 23 26 20\n22 11 13  6  5\n 2  0 12  3  7";
-            
+
             BoardSolver boardSolver = new(new NumberParser(), new BoardParser());
             BingoBoard losingBoard = boardSolver.GetLosingBoard(input, out int lastNumber);
-            
+
             List<int> unmarkedNumbers = losingBoard.GetUnmarkedNumbers();
-            
+
             Assert.AreEqual(13, lastNumber);
             Assert.AreEqual(148, unmarkedNumbers.Sum());
             Assert.AreEqual(1924, unmarkedNumbers.Sum() * lastNumber);
+        }
+
+        [Test]
+        public void Day5Part1()
+        {
+            string input = @"0,9 -> 5,9
+8,0 -> 0,8
+9,4 -> 3,4
+2,2 -> 2,1
+7,0 -> 7,4
+6,4 -> 2,0
+0,9 -> 2,9
+3,4 -> 1,4
+0,0 -> 8,8
+5,5 -> 8,2";
+
+            D5P1InputParser inputParser = new();
+            IEnumerable<Line> lines = inputParser.Parse(input);
+
+            OceanFloorSizeCalculator oceanFloorSizeCalculator = new();
+            Point size = oceanFloorSizeCalculator.CalculateSize(lines);
+            Assert.AreEqual(10,size.X);
+            Assert.AreEqual(10,size.Y);
+
+            OceanFloor oceanFloor = new(size.X,size.Y);
+            foreach (Line line in lines)
+            {
+                oceanFloor.PlotHydrothermalVentLine(line);
+            }
+
+            oceanFloor.Print();
+            Assert.AreEqual(5, oceanFloor.AmountOfPointsWithNumberOfOverlaps(2));
+        }
+        
+        [Test]
+        public void Day5Part2()
+        {
+            string input = @"0,9 -> 5,9
+8,0 -> 0,8
+9,4 -> 3,4
+2,2 -> 2,1
+7,0 -> 7,4
+6,4 -> 2,0
+0,9 -> 2,9
+3,4 -> 1,4
+0,0 -> 8,8
+5,5 -> 8,2";
+
+            D5P2InputParser inputParser = new();
+            IEnumerable<Line> lines = inputParser.Parse(input);
+
+            OceanFloorSizeCalculator oceanFloorSizeCalculator = new();
+            Point size = oceanFloorSizeCalculator.CalculateSize(lines);
+            Assert.AreEqual(10,size.X);
+            Assert.AreEqual(10,size.Y);
+
+            OceanFloor oceanFloor = new(size.X,size.Y);
+            foreach (Line line in lines)
+            {
+                oceanFloor.PlotHydrothermalVentLine(line);
+            }
+
+            oceanFloor.Print();
+            Assert.AreEqual(12, oceanFloor.AmountOfPointsWithNumberOfOverlaps(2));
         }
     }
 }
